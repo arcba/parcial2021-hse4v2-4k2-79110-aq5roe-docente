@@ -1,0 +1,162 @@
+<h3>{{Titulo}} <small>{{TituloAccionABMC[AccionABMC]}}</small></h3>
+<div class="row justify-content-center m-3" *ngIf="AccionABMC == 'L'">
+  <button type="button" class="btn btn-primary" (click)="Agregar()">
+<span class="fas fa-plus"> </span>
+Agregar
+</button>
+</div>
+<div class="container" *ngIf="AccionABMC == 'L'">
+  <div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th class="text-center">PoveedorId</th>
+          <th class="text-center">ProveedorRazonSocial</th>
+          <th class="text-center">ProveedorFecha</th>
+          <th class="text-center">ProveedorCodigo</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let Proveedores of Proveedores">
+          <td>{{Proveedores.PoveedorId}}</td>
+          <td>{{Proveedores.ProveedorRazonSocial}}</td>
+          <td>{{Proveedores.ProveedorFecha|date:'dd/MM/yyyy'}}</td>
+          <td>{{Proveedores.ProveedorCodigo}}</td>
+          <td style="text-align: center;">
+
+            <button type="button" class="btn btn-sm btn-outline-
+primary" title="Ver" (click)="(Proveedores)">
+
+<span class="fas fa-eye"></span>
+</button>
+
+            <button type="button" class="btn btn-sm btn-outline-
+primary" title="Modificar" (click)="Modificar(Proveedores)">
+
+<span class="fas fa-pencil-alt"></span>
+</button>
+            <button type="button" class="btn btn-sm btn-outline-danger"
+title="Eliminar" (click)="Eliminar(Proveedores)">
+<span class="fas fa-times"></span>
+</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<form name="FormReg" [formGroup]='FormReg' *ngIf="AccionABMC != 'L'" class="bg
+-light">
+  <fieldset [disabled]="AccionABMC==='C'">
+    <!-- PoveedorID-- -->
+   <!--  <div class="form-group row">
+
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="PoveedorID">ID <span class="text-danger">*</span></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" formControlName="PoveedorID" [ngClass]="{'is-invalid': (FormReg.controls.PoveedorID.touched || submitted)
+&& FormReg.controls.PoveedorID.errors}" />
+
+        <span class="text-danger" *ngIf="(FormReg.controls.PoveedorID.touched || submitted)
+&& FormReg.controls.PoveedorID.errors?.required">
+Dato requerido.
+</span>
+
+        <span class="text-danger" *ngIf="(FormReg.controls.PoveedorID.touched || submitted)
+&& FormReg.controls.PoveedorID.errors?.pattern">
+PoveedorID
+</span>
+      </div>
+    </div> -->
+    <!-- ProveedorFecha -->
+    <div class="form-group row">
+
+      <label class="col-form-label col-sm-2 col-sm-offset-2" for="ProveedorFecha">Fecha de alta <span class="text-danger">*</span></label>
+      <div class="col-sm-6">
+
+        <input type="text" class="form-control" formControlName="ProveedorFecha" [ngClass]="{'is-invalid': (FormReg.controls.ProveedorFecha.touched || submitted)
+&& FormReg.controls.ProveedorFecha.errors}"/>
+
+        <span class="text-danger" *ngIf="(FormReg.controls.ProveedorFecha.touched || submitted)
+&& FormReg.controls.ProveedorFecha.errors?.required">
+Dato requerido.
+</span>
+
+        <span class="text-danger" *ngIf="(FormReg.controls.ProveedorFecha.touched || submitted) 
+&& FormReg.controls.ProveedorFecha.errors?.pattern">
+ Dato fecha, formato dd/mm/aaaa.
+</span>
+      </div>
+    </div>
+
+    <!-- ProveedorCodigo -->
+    <div class="form-group row">
+
+      <label class="col-form-label col-sm-2 col-sm-offset-
+2" for="ProveedorCodigo">ProveedorCodigo <span
+
+class="text-danger">*</span></label>
+      <div class="col-sm-6">
+
+        <input type="text" class="form-control" name="ProveedorCodigo" formControlName="ProveedorCodigo" [ngClass]="{'is-invalid': (FormReg.controls.ProveedorCodigo.touched || submitted)
+&& FormReg.controls.ProveedorCodigo.errors}" />
+
+        <span class="text-danger" *ngIf="(FormReg.controls.ProveedorCodigo.touched || submitted)
+&& FormReg.controls.ProveedorCodigo.errors?.required">
+Dato requerido.
+</span>
+
+        <span class="text-danger" *ngIf="(FormReg.controls.ProveedorCodigo.touched || submitted)
+&& FormReg.controls.ProveedorCodigo.errors?.pattern">
+Dato numerico
+</span>
+      </div>
+    </div>
+
+
+
+        <!-- ProveedorRazonSocial -->
+        <div class="form-group row">
+
+        <label class="col-form-label col-sm-2 col-sm-offset-2" for="ProveedorRazonSocial">ProveedorRazonSocial 
+          <span class="text-danger">*</span></label>
+        <div class="col-sm-6">
+  
+          <input type="text" class="form-control" name="ProveedorRazonSocial" formControlName="ProveedorRazonSocial" [ngClass]="{'is-invalid': (FormReg.controls.ProveedorRazonSocial.touched )
+  && FormReg.controls.ProveedorRazonSocial.errors}" />
+  
+          <span class="text-danger" *ngIf="(FormReg.controls.ProveedorRazonSocial.touched )
+  && FormReg.controls.ProveedorRazonSocial.errors?.required">
+  Dato requerido.
+  </span>
+  
+          <span class="text-danger" *ngIf="(FormReg.controls.ProveedorRazonSocial.touched )
+  && FormReg.controls.ProveedorRazonSocial.errors?.pattern">
+  Dato Tipo String
+  </span>
+        </div>
+      </div>
+  </fieldset>
+  <div class="row justify-content-center">
+
+    <button type="button" class="btn btn-primary" (click)="Grabar()">
+
+<span class="fas fa-check"></span> Grabar
+</button>
+    &nbsp;
+    <button type="button" class="btn btn-warning" (click)="Volver()">
+
+<span class="fas fa-
+undo"></span> Cancelar
+
+</button>
+  </div>
+  <!--texto: Revisar los datos ingresados...-->
+  <div id="divMsjFormRegistro" *ngIf="submitted && FormReg.invalid" class="row
+alert alert-danger">
+    <span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
+  </div>
+
+</form>
